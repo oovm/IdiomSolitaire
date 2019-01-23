@@ -3,14 +3,10 @@
 .idea
 *.iml
 
-# Models
-*.pb
-*.wxf
-*.params
+# Database
 *.nb
 *.mx
-*.bin
-*.app
+*.csv
 
 # RAR
 *.zip
