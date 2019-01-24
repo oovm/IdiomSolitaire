@@ -11,7 +11,8 @@ SetDirectory@NotebookDirectory[];
 (*Data*)
 
 
-data = GeneralUtilities`Scope[
+data1 = GeneralUtilities`Scope[
+	Print@Hyperlink["https://github.com/by-syk/chinese-idiom-db"];
 	r := URLDownload[
 		"https://github.com/by-syk/chinese-idiom-db/raw/master/chinese-idioms-12976.txt",
 		"Source_1.mx"
@@ -23,7 +24,21 @@ data = GeneralUtilities`Scope[
 ];
 
 
-data = MapAt[StringRiffle@*StringSplit, data, {All, 2}]
+data2 = GeneralUtilities`Scope[
+	Print@Hyperlink["https://github.com/pwxcoo/chinese-xinhua"];
+	r := URLDownload[
+		"https://github.com/pwxcoo/chinese-xinhua/raw/master/data/idiom.json",
+		"Source_2.mx"
+	];
+	If[!FileExistsQ@"Source_2.mx", r];
+	tmp = Import["Source_2.mx", "RawJSON"];
+	Echo[Length@tmp, "Records:"];
+	Values /@ tmp[[All, {"word", "pinyin", "explanation"}]]
+];
+
+
+data = MapAt[StringRiffle@*StringSplit, Join[data1, data2], {All, 2}];
+data = SortBy[DeleteDuplicatesBy[data, First], Rest];
 
 
 (* ::Section:: *)
@@ -36,7 +51,7 @@ data = MapAt[StringRiffle@*StringSplit, data, {All, 2}]
 
 Export[
 	"database.csv",
-	SortBy[data, Rest], "CSV",
+	data, "CSV",
 	"TableHeadings" -> {"Idiom", "Pinyin", "Explanation"},
 	CharacterEncoding -> "UTF8"
 ]
