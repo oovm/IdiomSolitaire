@@ -42,7 +42,7 @@ data = SortBy[DeleteDuplicatesBy[data, First], Rest];
 
 
 (* ::Section:: *)
-(*Export*)
+(*Export Base*)
 
 
 (* ::Subsection:: *)
@@ -50,7 +50,7 @@ data = SortBy[DeleteDuplicatesBy[data, First], Rest];
 
 
 Export[
-	"database.csv",
+	"database-base.csv",
 	data, "CSV",
 	"TableHeadings" -> {"Idiom", "Pinyin", "Explanation"},
 	CharacterEncoding -> "UTF8"

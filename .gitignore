@@ -1,3 +1,9 @@
+# Cache
+__pycache__
+external/*.*
+!external/*.m
+!external/*.md
+
 # IDE
 .vscode
 .idea
@@ -6,7 +12,7 @@
 # Database
 *.nb
 *.mx
-*.csv
+*-base.csv
 
 # RAR
 *.zip
@@ -19,6 +25,3 @@
 *.jpeg
 *.bmp
 *.png
-
-# Cache
-__pycache__
