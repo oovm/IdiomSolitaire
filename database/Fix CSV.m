@@ -11,23 +11,40 @@ SetDirectory@NotebookDirectory[];
 (*Import Fix*)
 
 
-$replace = Sort@DeleteDuplicates@Import[
-	"database-replace.csv",
-	{"CSV", "Data"},
-	"HeaderLines" -> 1,
-	"IgnoreEmptyLines" -> True
-];
-Export[
-	"database-replace.csv",
-	$replace, "CSV",
-	"TableHeadings" -> {"Idiom", "Pinyin", "Explanation", "Synonym"},
-	"FillRows" -> False
+$replace = GeneralUtilities`Scope[
+	import = Import[
+		"database-replace.csv",
+		{"CSV", "Data"},
+		"HeaderLines" -> 1,
+		"IgnoreEmptyLines" -> True
+	];
+	export = Sort@DeleteDuplicates@import;
+	Export[
+		"database-replace.csv",
+		export, "CSV",
+		"TableHeadings" -> {"Idiom", "Pinyin", "Explanation", "Synonym"},
+		"FillRows" -> False
+	];
+	Return[export]
 ];
 
 
-$remove = Sort@DeleteDuplicates@Flatten@Import["database-remove.csv"];
-Export[
-	"database-remove.csv",
-	Partition[DeleteDuplicates@$remove, UpTo[10]],
-	"TextDelimiters" -> ""
+$remove = GeneralUtilities`Scope[
+	import = Import["database-remove.csv"];
+	add = StringSplit[Last@#, "\:ff0c"]& /@ Select[$replace, Length[#] == 4&];
+	export = Sort@DeleteDuplicates@Flatten@Join[First /@ $replace, import, add];
+	Export[
+		"database-remove.csv",
+		Partition[DeleteCases[DeleteDuplicates@export, ""], UpTo[10]],
+		"TextDelimiters" -> "",
+		"FillRows" -> False
+	];
+	Return[export]
+];
+
+
+$base = Import[
+	"database-base.csv",
+	{"CSV", "Dataset"},
+	"HeaderLines" -> 1
 ];
