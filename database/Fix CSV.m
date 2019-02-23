@@ -31,7 +31,7 @@ $replace = GeneralUtilities`Scope[
 
 $remove = GeneralUtilities`Scope[
 	import = Import["database-remove.csv"];
-	add = StringSplit[Last@#, "\:ff0c"]& /@ Select[$replace, Length[#] == 4&];
+	add = StringSplit[Last@#, "|"]& /@ $replace;
 	export = Sort@DeleteDuplicates@Flatten@Join[First /@ $replace, import, add];
 	Export[
 		"database-remove.csv",
@@ -43,8 +43,15 @@ $remove = GeneralUtilities`Scope[
 ];
 
 
-$base = Import[
-	"database-base.csv",
-	{"CSV", "Dataset"},
-	"HeaderLines" -> 1
-];
+(* ::Section:: *)
+(*Apply Fix*)
+
+
+$base = Import["database-base.csv", {"CSV", "Dataset"}, "HeaderLines" -> 1];
+data = Query[DeleteCases[_?(MemberQ[$remove, #Idiom]&)]]@$base;
+import = Import["database-replace.csv", {"CSV", "Dataset"}, "HeaderLines" -> 1];
+Export[
+	FileNameJoin[{ParentDirectory[NotebookDirectory[]], "external", "database.csv"}],
+	Dataset@SortBy[Join[Normal@data, Normal@import], #Pinyin&],
+	CharacterEncoding -> "UTF8"
+]

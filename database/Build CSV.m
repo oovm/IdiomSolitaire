@@ -38,7 +38,7 @@ data2 = GeneralUtilities`Scope[
 
 
 data = MapAt[StringRiffle@*StringSplit, Join[data1, data2], {All, 2}];
-data = SortBy[DeleteDuplicatesBy[data, First], Rest];
+data = SortBy[Append[#, ""]& /@ DeleteDuplicatesBy[data, First], Rest];
 
 
 (* ::Section:: *)
@@ -52,7 +52,7 @@ data = SortBy[DeleteDuplicatesBy[data, First], Rest];
 Export[
 	"database-base.csv",
 	data, "CSV",
-	"TableHeadings" -> {"Idiom", "Pinyin", "Explanation"},
+	"TableHeadings" -> {"Idiom", "Pinyin", "Explanation", "Synonym"},
 	CharacterEncoding -> "UTF8"
 ]
 
