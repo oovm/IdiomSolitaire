@@ -12,7 +12,3 @@ export const Killer = {
     Pinyin: K.KillPinyin.map(x => x.Idiom),
     Letter: K.KillLetter.map(x => x.Idiom),
 }
-
-console.log(SelfReference)
-
-console.log(Killer)

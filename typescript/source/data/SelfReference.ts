@@ -11,6 +11,12 @@ export const SelfReferenceCharacter = [
         "Explain": "比喻兄弟相残。"
     },
     {
+        "Idiom": "讹以滋讹",
+        "Pinyin": "é yǐ zī é",
+        "Explain": "把本来错误的东西加以传播，越传越错。",
+        "Synonym": "讹以传讹"
+    },
+    {
         "Idiom": "防不胜防",
         "Pinyin": "fáng bù shèng fáng",
         "Explain": "指想到防备却已来不及防备。",
@@ -51,7 +57,8 @@ export const SelfReferenceCharacter = [
     {
         "Idiom": "精益求精",
         "Pinyin": "jīng yì qiú jīng",
-        "Explain": "精：完美，好；益：更加。好了还求更好。"
+        "Explain": "精：精良，精美；益：更加。好了还求更好。",
+        "Synonym": "新益求新"
     },
     {
         "Idiom": "轮扁斫轮",
@@ -74,9 +81,10 @@ export const SelfReferenceCharacter = [
         "Explain": "一年又一年。比喻日子久，时间长。也形容光阴白白地过去。"
     },
     {
-        "Idiom": "亲上做亲",
-        "Pinyin": "qīn shàng zuò qīn",
-        "Explain": "指原是亲戚，又再结姻亲。"
+        "Idiom": "亲上成亲",
+        "Pinyin": "qīn shàng chéng qīn",
+        "Explain": "指原是亲戚，又再结姻亲。",
+        "Synonym": "亲上做亲"
     },
     {
         "Idiom": "忍无可忍",
@@ -92,6 +100,16 @@ export const SelfReferenceCharacter = [
         "Idiom": "日复一日",
         "Pinyin": "rì fù yī rì",
         "Explain": "复：再，又。过了一天又一天。比喻日子久，时间长。也形容光阴白白地过去。"
+    },
+    {
+        "Idiom": "日慎一日",
+        "Pinyin": "rì shèn yī rì",
+        "Explain": "慎谨慎。一天比一天谨慎。形容做事十分小心。"
+    },
+    {
+        "Idiom": "日甚一日",
+        "Pinyin": "rì shèn yī rì",
+        "Explain": "一天比一天厉害。"
     },
     {
         "Idiom": "数不胜数",
@@ -111,7 +129,8 @@ export const SelfReferenceCharacter = [
     {
         "Idiom": "天外有天",
         "Pinyin": "tiān wài yǒu tiān",
-        "Explain": "指某一境界之外更有无穷无尽的境界。多用来表示人的眼界受客观条件的限制，认识的领域需要不断扩大。也表示美好的境界阅历不尽。亦作山外有山”、峰外有峰”"
+        "Explain": "指某一境界之外更有无穷无尽的境界。多用来表示人的眼界受客观条件的限制，认识的领域需要不断扩大。也表示美好的境界阅历不尽。",
+        "Synonym": "山外有山|峰外有峰|人外有人"
     },
     {
         "Idiom": "痛定思痛",
@@ -119,14 +138,10 @@ export const SelfReferenceCharacter = [
         "Explain": "指悲痛的心情平静以后，再追想当时所受的痛苦。常含有警惕未来之意。"
     },
     {
-        "Idiom": "头上安头",
-        "Pinyin": "tóu shàng ān tóu",
-        "Explain": "比喻多余和重复。"
-    },
-    {
         "Idiom": "头上著头",
         "Pinyin": "tóu shàng zhuó tóu",
-        "Explain": "犹言头上安头。比喻多余和重复。"
+        "Explain": "比喻多余和重复。",
+        "Synonym": "头上安头"
     },
     {
         "Idiom": "微乎其微",
@@ -136,12 +151,14 @@ export const SelfReferenceCharacter = [
     {
         "Idiom": "为所欲为",
         "Pinyin": "wéi suǒ yù wéi",
-        "Explain": "为：做。本指做自己想做的事。后指想干什么就干什么。"
+        "Explain": "本指做自己想做的事。后指想干什么就干什么，任意而为。",
+        "Synonym": "唯所欲为|惟所欲为"
     },
     {
         "Idiom": "闻所未闻",
         "Pinyin": "wén suǒ wèi wén",
-        "Explain": "闻：听到。听到了从来没有听到过的事。形容事物新奇罕见。"
+        "Explain": "听到了从来没有听到过的事。形容事物新奇罕见。",
+        "Synonym": "闻所不闻"
     },
     {
         "Idiom": "屋下架屋",
@@ -179,28 +196,9 @@ export const SelfReferenceCharacter = [
 export const SelfReferencePinyin = [
     {
         "Idiom": "以肉去蚁",
-        "Pinyin": "yǐ ròu qù yǐ",
-        "Explain": "用肉驱赶蚂蚁，蚂蚁越多。比喻行为和目的自相矛盾，只能得到相反的结果。"
-    },
-    {
-        "Idiom": "以骨去蚁",
         "Pinyin": "yǐ gǔ qù yǐ",
-        "Explain": "用肉驱赶蚂蚁，蚂蚁越多。比喻行为和目的自相矛盾，只能得到相反的结果。同以肉去蚁”。"
-    },
-    {
-        "Idiom": "唯所欲为",
-        "Pinyin": "wéi suǒ yù wéi",
-        "Explain": "随心所欲，任意而为。"
-    },
-    {
-        "Idiom": "惟所欲为",
-        "Pinyin": "wéi suǒ yù wéi",
-        "Explain": "想干什么就干什么，任意而为。"
-    },
-    {
-        "Idiom": "束手无术",
-        "Pinyin": "shù shǒu wú shù",
-        "Explain": "指捆住双手，无计可施。形容遇到问题没有解决的办法。"
+        "Explain": "用肉驱赶蚂蚁，蚂蚁越多。比喻行为和目的自相矛盾，只能得到相反的结果。",
+        "Synonym": "以骨去蚁"
     },
     {
         "Idiom": "狐埋狐搰",
@@ -253,11 +251,6 @@ export const SelfReferencePinyin = [
         "Explain": "指婚姻是由月下老人暗中用一红线牵连而成。"
     },
     {
-        "Idiom": "千里姻缘使线牵",
-        "Pinyin": "qiān lǐ yīn yuán shǐ xiàn qiān",
-        "Explain": "指婚姻是由月下老人暗中用一红线牵连而成。同千里姻缘一线牵”。"
-    },
-    {
         "Idiom": "知其不可而为之",
         "Pinyin": "zhī qí bù kě ér wéi zhī",
         "Explain": "明知做不到却偏要去做。表示意志坚决。有时也表示倔强固执。"
@@ -271,39 +264,26 @@ export const SelfReferencePinyin = [
 
 export const SelfReferenceLetter = [
     {
-        "Idiom": "一劳久逸",
-        "Pinyin": "yī láo jiǔ yì",
-        "Explain": "辛苦一次，把事情办好，以后就可以不再费力了。同一劳永逸”。"
-    },
-    {
         "Idiom": "一劳永逸",
         "Pinyin": "yī láo yǒng yì",
-        "Explain": "逸：安逸。辛苦一次，把事情办好，以后就可以不再费力了。"
+        "Explain": "辛苦一次，把事情办好，以后就可以不再费力了。",
+        "Synonym": "一劳久逸"
     },
     {
         "Idiom": "一字不易",
-        "Pinyin": "yī zì bù yì",
+        "Pinyin": "yī zì bú yì",
         "Explain": "文字精醇，一个字也不能更改。也用于指抄袭者一字不改地照抄别人的文章。"
     },
     {
         "Idiom": "一定不易",
         "Pinyin": "yī dìng bù yì",
-        "Explain": "易：改变。原指一定下来就不变更，后形容事理正确，不可改变。"
-    },
-    {
-        "Idiom": "一定不移",
-        "Pinyin": "yī dìng bù yí",
-        "Explain": "原指一定下来就不变更，后形容事理正确，不可改变。同一定不易”。"
+        "Explain": "原指一定下来就不变更，后形容事理正确，不可改变。",
+        "Synonym": "一定不移"
     },
     {
         "Idiom": "一心一意",
         "Pinyin": "yī xīn yī yì",
         "Explain": "只有一个心眼儿，没有别的考虑。"
-    },
-    {
-        "Idiom": "一成不易",
-        "Pinyin": "yī chéng bù yì",
-        "Explain": "一经形成，不再改变。同一成不变”。"
     },
     {
         "Idiom": "一脚不移",
@@ -336,24 +316,16 @@ export const SelfReferenceLetter = [
         "Explain": "谓处事没有固定不变的准则，要择善而从。"
     },
     {
-        "Idiom": "以夷伐夷",
-        "Pinyin": "yǐ yí fá yí",
-        "Explain": "夷：旧指外族或外国。指在军事上利用对方本身的矛盾，使自相冲突，削弱力量。"
-    },
-    {
         "Idiom": "以夷制夷",
         "Pinyin": "yǐ yí zhì yí",
-        "Explain": "夷外族。利用外族和外国之间的内部矛盾，使其相互冲突，削弱其力量。"
+        "Explain": "夷外族。利用外族和外国之间的内部矛盾，使其相互冲突，削弱其力量。",
+        "Synonym": "以夷治夷"
     },
     {
         "Idiom": "以夷攻夷",
         "Pinyin": "yǐ yí gōng yí",
-        "Explain": "使夷人自相攻伐。本是封建统治阶级对少数民族实行的一种民族分化政策。晚清时，亦指利用西方的科学技术来对付资本主义国家的侵略。"
-    },
-    {
-        "Idiom": "以夷治夷",
-        "Pinyin": "yǐ yí zhì yí",
-        "Explain": "利用外族或外国之间的矛盾，使其互相冲突，削减力量，以便控制或攻伐。"
+        "Explain": "使夷人自相攻伐。本是封建统治阶级对少数民族实行的一种民族分化政策。晚清时，亦指利用西方的科学技术来对付资本主义国家的侵略。",
+        "Synonym": "以夷伐夷"
     },
     {
         "Idiom": "以疑决疑",
@@ -361,24 +333,16 @@ export const SelfReferenceLetter = [
         "Explain": "用疑惑的认识来判断捉摸不定的事物。"
     },
     {
-        "Idiom": "以词害意",
-        "Pinyin": "yǐ cí hài yì",
-        "Explain": "因拘泥于辞义而误会或曲解作者的原意。"
-    },
-    {
         "Idiom": "以辞害意",
         "Pinyin": "yǐ cí hài yì",
-        "Explain": "因拘泥于辞义而误会或曲解作者的原意。"
+        "Explain": "因拘泥于辞义而误会或曲解作者的原意。",
+        "Synonym": "以词害意"
     },
     {
         "Idiom": "以铢称镒",
         "Pinyin": "yǐ zhū chēng yì",
-        "Explain": "用铢同镒相比，表示力量极不相称，处于绝对劣势。"
-    },
-    {
-        "Idiom": "以铢程镒",
-        "Pinyin": "yǐ zhū chéng yì",
-        "Explain": "用铢同镒作比较，表示很不相称。"
+        "Explain": "用铢同镒相比，表示力量极不相称，处于绝对劣势。",
+        "Synonym": "以铢程镒"
     },
     {
         "Idiom": "以防万一",
@@ -451,24 +415,10 @@ export const SelfReferenceLetter = [
         "Explain": "师心以心为师，这里指只相信自己；自是按自己的主观意图行事。形容自以为是，不肯接受别人的正确意见。"
     },
     {
-        "Idiom": "感人肺肝",
-        "Pinyin": "gǎn rén fèi gān",
-        "Explain": "形容使人的内心深受感动。"
-    },
-    {
-        "Idiom": "断长续短",
-        "Pinyin": "duàn chāng xù duǎn",
-        "Explain": "续：接、补。截断长的来补短的。比喻取别人的长处，来补自己的短处。"
-    },
-    {
         "Idiom": "断长补短",
         "Pinyin": "duàn chāng bǔ duǎn",
-        "Explain": "截断长的来补短的。比喻取别人的长处，来补自己的短处。"
-    },
-    {
-        "Idiom": "旧瓶新酒",
-        "Pinyin": "jiù píng xīn jiǔ",
-        "Explain": "比喻旧形式，新内容的意思。"
+        "Explain": "截断长的来补短的。比喻取别人的长处，来补自己的短处。",
+        "Synonym": "断长续短"
     },
     {
         "Idiom": "时不可失",
@@ -481,11 +431,6 @@ export const SelfReferenceLetter = [
         "Explain": "犹易如反掌。比喻事情非常容易做。"
     },
     {
-        "Idiom": "映雪囊萤",
-        "Pinyin": "yìng xuě náng yíng",
-        "Explain": "形容夜以继日，苦学不倦。"
-    },
-    {
         "Idiom": "是非得失",
         "Pinyin": "shì fēi dé shī",
         "Explain": "正确与错误，得到的与失去的。"
@@ -493,12 +438,8 @@ export const SelfReferenceLetter = [
     {
         "Idiom": "朝奏夕召",
         "Pinyin": "zhāo zòu xī zhào",
-        "Explain": "指早晨上书帝王，晚上就被召见。形容被朝廷任用之速。"
-    },
-    {
-        "Idiom": "朝奏暮召",
-        "Pinyin": "zhāo zòu mù zhào",
-        "Explain": "指早晨上书帝王，晚上就被召见。形容被朝廷任用之速。"
+        "Explain": "指早晨上书帝王，晚上就被召见。形容被朝廷任用之速。",
+        "Synonym": "朝奏暮召"
     },
     {
         "Idiom": "木公金母",
@@ -511,11 +452,6 @@ export const SelfReferenceLetter = [
         "Explain": "研研究，审查；几细微。指探讨研究事物的深奥隐微之处。"
     },
     {
-        "Idiom": "极深研幾",
-        "Pinyin": "jí shēn yán jī",
-        "Explain": "研：研究，审查；幾：细微。形容钻研深刻、细致。"
-    },
-    {
         "Idiom": "欲取姑予",
         "Pinyin": "yù qǔ gū yǔ",
         "Explain": "姑：暂且；与：给与。要想夺取他些什么，得暂且先给他些什么。指先付出代价以诱使对方放松警惕，然后找机会夺取。"
@@ -526,21 +462,6 @@ export const SelfReferenceLetter = [
         "Explain": "象烟云在眼前一晃而过。比喻事物很快就成为过去。也比喻身外之物，不必重视。"
     },
     {
-        "Idiom": "猿啼鹤怨",
-        "Pinyin": "yuán tí hè yuàn",
-        "Explain": "猿和鹤凄厉地啼叫。"
-    },
-    {
-        "Idiom": "猿悲鹤怨",
-        "Pinyin": "yuán bēi hè yuàn",
-        "Explain": "猿和鹤凄厉地啼叫。"
-    },
-    {
-        "Idiom": "猿惊鹤怨",
-        "Pinyin": "yuán jīng hè yuàn",
-        "Explain": "猿和鹤凄厉地啼叫。"
-    },
-    {
         "Idiom": "畏首畏尾",
         "Pinyin": "wèi shǒ wèi wěi",
         "Explain": "畏：怕，惧。前也怕，后也怕。比喻做事胆子小，顾虑多。"
@@ -549,11 +470,6 @@ export const SelfReferenceLetter = [
         "Idiom": "瘠人肥己",
         "Pinyin": "jí rén féi jǐ",
         "Explain": "瘠：瘦，引申为悭吝；肥：胖，引申为贪婪。对待别人很吝啬，而自己却很贪婪。"
-    },
-    {
-        "Idiom": "百战百败",
-        "Pinyin": "bǎi zhàn bǎi bài",
-        "Explain": "指每战必败。"
     },
     {
         "Idiom": "知足知止",
@@ -568,12 +484,8 @@ export const SelfReferenceLetter = [
     {
         "Idiom": "积劳成疾",
         "Pinyin": "jī láo chéng jí",
-        "Explain": "积劳：长期劳累过度；疾：病。因长期工作，劳累过度而生了病。"
-    },
-    {
-        "Idiom": "积忧成疾",
-        "Pinyin": "jī yōu chéng jí",
-        "Explain": "忧：忧虑。长久忧虑就会得病。"
+        "Explain": "积劳：长期劳累过度。因长期工作，劳累过度而生了病。",
+        "Synonym": "积劳成病|积忧成疾"
     },
     {
         "Idiom": "移情遣意",
@@ -596,14 +508,10 @@ export const SelfReferenceLetter = [
         "Explain": "花信开花时期，花期。指女子的年龄到了二十四岁。也泛指女子正处年轻貌美之时。"
     },
     {
-        "Idiom": "行崄侥幸",
-        "Pinyin": "xíng xiǎn jiǎo xìng",
-        "Explain": "指冒险行事以求利。同行险徼幸”。"
-    },
-    {
         "Idiom": "行险徼幸",
         "Pinyin": "xíng xiǎn jiǎo xìng",
-        "Explain": "指冒险行事以求利。"
+        "Explain": "指冒险行事以求利。",
+        "Synonym": "行崄侥幸"
     },
     {
         "Idiom": "衣锦褧衣",
@@ -621,14 +529,10 @@ export const SelfReferenceLetter = [
         "Explain": "计谋、力量都用尽了。同计穷力竭”。"
     },
     {
-        "Idiom": "计穷智极",
-        "Pinyin": "jì qióng zhì jí",
-        "Explain": "指计虑穷尽。见计穷虑极”。"
-    },
-    {
         "Idiom": "计穷虑极",
         "Pinyin": "jì qióng lǜ jí",
-        "Explain": "指计虑穷尽。"
+        "Explain": "指计虑穷尽。",
+        "Synonym": "计穷智极|计穷虑尽"
     },
     {
         "Idiom": "负固不服",
@@ -651,14 +555,10 @@ export const SelfReferenceLetter = [
         "Explain": "犹言顺应时俗。"
     },
     {
-        "Idiom": "适当其时",
-        "Pinyin": "shì dāng qí shí",
-        "Explain": "指恰巧遇上那个时机。"
-    },
-    {
         "Idiom": "适逢其时",
         "Pinyin": "shì féng qí shí",
-        "Explain": "恰巧碰上那个机会或时机。同适逢其会”。"
+        "Explain": "恰巧碰上那个机会或时机。",
+        "Synonym": "适当其时|适逢其会"
     },
     {
         "Idiom": "遭家不造",
@@ -688,7 +588,8 @@ export const SelfReferenceLetter = [
     {
         "Idiom": "旧瓶装新酒",
         "Pinyin": "jiù píng zhuāng xīn jiǔ",
-        "Explain": "比喻用旧的形式表现新的内容。"
+        "Explain": "比喻用旧的形式表现新的内容。",
+        "Synonym": "旧瓶新酒"
     },
     {
         "Idiom": "一十八般武艺",
