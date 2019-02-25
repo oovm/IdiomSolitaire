@@ -25,3 +25,7 @@ external/*.*
 *.jpeg
 *.bmp
 *.png
+
+#node
+node_modules/
+yarn.lock
