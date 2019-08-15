@@ -29,3 +29,6 @@ external/*.*
 #node
 node_modules/
 yarn.lock
+
+#output
+dist
