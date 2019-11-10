@@ -13,6 +13,7 @@ external/*.*
 *.nb
 *.mx
 *-base.csv
+*.ps1
 
 # RAR
 *.zip
@@ -26,9 +27,9 @@ external/*.*
 *.bmp
 *.png
 
-#node
+# Build
 node_modules/
+target/
+dist/
 yarn.lock
-
-#output
-dist
+Cargo.lock

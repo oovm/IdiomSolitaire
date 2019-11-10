@@ -1,24 +1,11 @@
 {
     "private": true,
-    "type": "module",
     "scripts": {
-        "start": "node --experimental-modules dist/index.js",
-        "tsc": "tsc -b",
-        "deploy": "bash build/deploy.sh",
-        "lint": "tslint projects/**/*.ts",
-        "lint:fix": "tslint projects/**/*.ts --fix"
-    },
-    "devDependencies": {
-        "@types/node": "^10.12.18",
-        "semver": "^5.6.0",
-        "ts-loader": "^5.3.2",
-        "ts-node": "^8.0.2",
-        "tslint": "^5.12.1",
-        "typescript": "^3.2.2"
-    },
-    "files": [
-        "source",
-        "dist"
-    ],
-    "dependencies": {}
+        "build": "cargo build --release",
+        "test": "cargo test --release",
+        "fmt": "cargo fmt --all",
+        "push": "wee test && git push",
+        "reset": "git reset Head~ --soft",
+        "pub": "cargo-publish-all --yes --allow-dirty"
+    }
 }

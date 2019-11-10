@@ -8,6 +8,20 @@ SetDirectory@NotebookDirectory[];
 
 
 (* ::Section:: *)
+(*Functions*)
+
+
+norm = RemoveDiacritics[#, Language -> "English"]&;
+addLetter = <|
+	"Idiom" -> #Idiom,
+	"Pinyin" -> #Pinyin,
+	"Letter" -> norm[#Pinyin],
+	"Explanation" -> #Explanation,
+	"Synonym" -> #Synonym
+|>&;
+
+
+(* ::Section:: *)
 (*Import Fix*)
 
 
@@ -36,8 +50,7 @@ $remove = GeneralUtilities`Scope[
 	Export[
 		"database-remove.csv",
 		Partition[DeleteCases[DeleteDuplicates@export, ""], UpTo[10]],
-		"TextDelimiters" -> "",
-		"FillRows" -> False
+		"TextDelimiters" -> ""
 	];
 	Return[export]
 ];
@@ -50,8 +63,9 @@ $remove = GeneralUtilities`Scope[
 $base = Import["database-base.csv", {"CSV", "Dataset"}, "HeaderLines" -> 1];
 data = Query[DeleteCases[_?(MemberQ[$remove, #Idiom]&)]]@$base;
 import = Import["database-replace.csv", {"CSV", "Dataset"}, "HeaderLines" -> 1];
+export = Dataset@SortBy[Join[data, Normal@import], #Pinyin&];
 Export[
 	FileNameJoin[{ParentDirectory[NotebookDirectory[]], "external", "database.csv"}],
-	Dataset@SortBy[Join[Normal@data, Normal@import], #Pinyin&],
+	Query[All, addLetter]@export,
 	CharacterEncoding -> "UTF8"
 ]
