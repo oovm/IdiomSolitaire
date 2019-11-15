@@ -1,0 +1,15 @@
+[workspace]
+members = ["projects/*"]
+default-members = [
+    "projects/idiom-solitaire-core",
+    "projects/idiom-solitaire-web",
+]
+exclude = [
+    "projects/.DS_Store",
+    "projects/database",
+    "projects/external",
+    "projects/solitaire-killer-ts",
+]
+
+[profile.release]
+lto = true

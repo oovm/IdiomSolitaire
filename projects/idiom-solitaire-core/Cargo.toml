@@ -1,0 +1,19 @@
+[package]
+name = "qr-art-core"
+publish = false
+version = "0.1.0"
+authors = ["Aster <192607617@qq.com>"]
+description = "..."
+repository = "https://github.com/GalAster/qr-art"
+readme = "../../readme.md"
+license = "MPL-2.0"
+edition = "2018"
+
+[dependencies]
+itertools = "0.9"
+rayon = "1.5"
+
+[dev-dependencies]
+
+[features]
+default = []
