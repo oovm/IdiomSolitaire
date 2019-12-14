@@ -1,11 +1,10 @@
 [package]
-name = "qr-art-web"
+name = "Idiom-solitaire-web"
 publish = false
 version = "0.1.0"
 authors = ["Aster <192607617@qq.com>"]
-repository = "https://github.com/GalAster/qr-art"
+repository = "https://github.com/GalAster/IdiomSolitaire"
 readme = "../../readme.md"
-readme = "Readme.md"
 license = "MPL-2.0"
 edition = "2018"
 

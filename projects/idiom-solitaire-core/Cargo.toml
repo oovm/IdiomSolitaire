@@ -1,10 +1,9 @@
 [package]
-name = "qr-art-core"
-publish = false
+name = "idiom-solitaire"
 version = "0.1.0"
 authors = ["Aster <192607617@qq.com>"]
 description = "..."
-repository = "https://github.com/GalAster/qr-art"
+repository = "https://github.com/GalAster/IdiomSolitaire"
 readme = "../../readme.md"
 license = "MPL-2.0"
 edition = "2018"
@@ -12,6 +11,9 @@ edition = "2018"
 [dependencies]
 itertools = "0.9"
 rayon = "1.5"
+pinyin = "0.8"
+csv = "1.1"
+serde = {version = "1.0" , features = ["derive"]}
 
 [dev-dependencies]
 

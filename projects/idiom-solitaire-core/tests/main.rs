@@ -1,13 +1,19 @@
-use image::{
-    imageops::{resize, FilterType},
-    open, DynamicImage, GrayImage,
-};
+use idiom_solitaire::{Dictionary, Idiom, Result};
+
+fn example() -> Result<()> {
+    // Build the CSV reader and iterate over each record.
+    let mut rdr = csv::ReaderBuilder::new().has_headers(true).from_path("../database/database-base.csv")?;
+    for result in rdr.deserialize() {
+        // Notice that we need to provide a type hint for automatic
+        // deserialization.
+        let record: Idiom = result?;
+        println!("{:?}", record);
+    }
+    Ok(())
+}
 
 #[test]
-fn test() {
-    let rgba = open("tests/wolfram-wolf.png").unwrap().into_rgba();
-    let gray = DynamicImage::ImageRgba8(rgba).into_luma();
-    let out = resize(&gray, 177, 177, FilterType::Lanczos3);
-    let out = DynamicImage::ImageLuma8(out).into_luma();
-    println!("{}", out)
+fn main() {
+    let dict = Dictionary::load_csv("../database/database-base.csv").unwrap();
+    println!("{:#?}", dict);
 }

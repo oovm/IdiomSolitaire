@@ -1,13 +1,5 @@
-pub use crate::theme::QRArtTheme;
+mod dictionary;
+mod errors;
 
-mod theme;
-
-
-
-
-
-pub struct QRArt {
-    traverse: Traverse,
-    background: bool,
-    theme: QRArtTheme
-}
+pub use dictionary::{Dictionary, Idiom};
+pub use errors::{Error, Result};
