@@ -1,6 +1,7 @@
 #[derive(Debug, Clone)]
 pub enum Error {
     UnknownError,
+    DictionaryNotFound,
     IOError(String),
     ParseError(String),
 }
