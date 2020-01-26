@@ -10,10 +10,10 @@ edition = "2018"
 
 [dependencies]
 itertools = "0.9"
-rayon = "1.5"
 pinyin = "0.8"
 csv = "1.1"
 serde = {version = "1.0" , features = ["derive"]}
+rand = {version = "0.7" , features = ["small_rng"]}
 
 [dev-dependencies]
 

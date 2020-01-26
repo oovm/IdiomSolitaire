@@ -2,6 +2,8 @@
 pub enum Error {
     UnknownError,
     DictionaryNotFound,
+    SolitaireNotFound,
+    NoneError,
     IOError(String),
     ParseError(String),
 }
@@ -15,5 +17,11 @@ impl From<csv::Error> for Error {
             Io(_) => Self::IOError(format!("{}", e)),
             _ => Self::ParseError(format!("{}", e)),
         }
+    }
+}
+
+impl From<std::option::NoneError> for Error {
+    fn from(_: std::option::NoneError) -> Self {
+        Self::NoneError
     }
 }

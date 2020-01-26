@@ -63,7 +63,7 @@ $remove = GeneralUtilities`Scope[
 $base = Import["database-base.csv", {"CSV", "Dataset"}, "HeaderLines" -> 1];
 data = Query[DeleteCases[_?(MemberQ[$remove, #Idiom]&)]]@$base;
 import = Import["database-replace.csv", {"CSV", "Dataset"}, "HeaderLines" -> 1];
-export = Dataset@SortBy[Join[data, Normal@import], #Pinyin&];
+export = Dataset@SortBy[Select[Join[data, Normal@import], StringLength@#Idiom == 4&], #Pinyin&];
 Export[
 	FileNameJoin[{ParentDirectory[NotebookDirectory[]], "external", "database.csv"}],
 	Query[All, addLetter]@export,

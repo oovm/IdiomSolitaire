@@ -1,4 +1,4 @@
-use idiom_solitaire::Dictionary;
+use idiom_solitaire::{SolitaireMode, SolitaireSolver};
 
 #[test]
 fn ready() {
@@ -6,7 +6,16 @@ fn ready() {
 }
 
 #[test]
-fn main() {
-    let dict = Dictionary::load_csv("../external/database.csv").unwrap();
-    println!("{:#?}", dict.tone_map());
+fn one() {
+    let mut solver = SolitaireSolver::default();
+    solver.load(include_bytes!("../../external/database.csv")).unwrap();
+    println!("{:#?}", solver.solve("为所欲为"));
+}
+
+#[test]
+fn chain() {
+    let mut solver = SolitaireSolver::default();
+    solver.mode = SolitaireMode::Character;
+    solver.load(include_bytes!("../../external/database.csv")).unwrap();
+    println!("{:#?}", solver.solve_chain("为所欲为", 100).0);
 }

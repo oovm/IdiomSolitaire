@@ -1,4 +1,10 @@
-use crate::{Dictionary, Error::DictionaryNotFound, Idiom, Result};
+use crate::{
+    Dictionary,
+    Error::{DictionaryNotFound, SolitaireNotFound},
+    Idiom, Result,
+};
+use pinyin::ToPinyin;
+use rand::{rngs::SmallRng, seq::IteratorRandom, SeedableRng};
 use std::collections::HashMap;
 
 #[derive(Clone, Debug)]
@@ -13,11 +19,12 @@ pub struct SolitaireSolver {
     pub dict: Dictionary,
     pub state: HashMap<String, Vec<Idiom>>,
     pub mode: SolitaireMode,
+    pub rng: SmallRng,
 }
 
 impl Default for SolitaireSolver {
     fn default() -> Self {
-        Self { dict: Default::default(), state: Default::default(), mode: SolitaireMode::Tone }
+        Self { dict: Default::default(), state: Default::default(), mode: SolitaireMode::Tone, rng: SmallRng::from_entropy() }
     }
 }
 
@@ -44,7 +51,39 @@ impl SolitaireSolver {
         Ok(())
     }
 
-    pub fn solve(&mut self) {
+    pub fn solve(&mut self, input: &str) -> Result<Idiom> {
+        let head = input.chars().rev().next()?;
+        let key = match self.mode {
+            SolitaireMode::Character => head.to_string(),
+            SolitaireMode::Pinyin => head.to_pinyin()?.with_tone().to_string(),
+            SolitaireMode::Tone => head.to_pinyin()?.plain().to_string(),
+        };
+        if let Some(s) = self.state.get_mut(&key) {
+            if s.is_empty() {
+                return Err(SolitaireNotFound);
+            }
+            let i = (0..s.len()).choose(&mut self.rng)?;
+            return Ok(s.swap_remove(i));
+        }
+        Err(SolitaireNotFound)
+    }
 
+    pub fn solve_chain(&mut self, head: &str, length: usize) -> (Vec<Idiom>, bool) {
+        let mut out = vec![];
+        let mut success = true;
+        let mut this = String::from(head);
+        for _ in 0..length {
+            match self.solve(&this) {
+                Ok(o) => {
+                    this = o.idiom.clone();
+                    out.push(o)
+                }
+                Err(_) => {
+                    success = false;
+                    break;
+                }
+            }
+        }
+        return (out, success);
     }
 }

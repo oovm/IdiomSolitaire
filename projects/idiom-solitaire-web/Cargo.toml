@@ -1,5 +1,5 @@
 [package]
-name = "Idiom-solitaire-web"
+name = "idiom-solitaire-web"
 publish = false
 version = "0.1.0"
 authors = ["Aster <192607617@qq.com>"]
@@ -9,10 +9,6 @@ license = "MPL-2.0"
 edition = "2018"
 
 [dependencies]
-image = "0.23"
-qrcode-generator = "4.0"
-
-[dev-dependencies]
-
-[features]
-default = []
+yew = "0.17"
+idiom-solitaire = {version = "0.1", path = "../idiom-solitaire-core"}
+anyhow = "1.0"
