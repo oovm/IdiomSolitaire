@@ -5,16 +5,19 @@ use crate::{
 };
 use pinyin::ToPinyin;
 use rand::{rngs::SmallRng, seq::IteratorRandom, SeedableRng};
-use std::collections::HashMap;
+use std::{
+    collections::HashMap,
+    fmt::{self, Debug, Formatter},
+};
 
 #[derive(Clone, Debug)]
 pub enum SolitaireMode {
     Character = 0,
-    Pinyin = 1,
-    Tone = 2,
+    Tone = 1,
+    Sound = 2,
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone)]
 pub struct SolitaireSolver {
     pub dict: Dictionary,
     pub state: HashMap<String, Vec<Idiom>>,
@@ -25,6 +28,19 @@ pub struct SolitaireSolver {
 impl Default for SolitaireSolver {
     fn default() -> Self {
         Self { dict: Default::default(), state: Default::default(), mode: SolitaireMode::Tone, rng: SmallRng::from_entropy() }
+    }
+}
+
+impl Debug for SolitaireSolver {
+    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+        match self {
+            Self { dict, state, mode, rng: _ } => f
+                .debug_struct("SolitaireSolver")
+                .field("dict", &dict.0.len())
+                .field("state", &state.len())
+                .field("mode", mode)
+                .finish(),
+        }
     }
 }
 
@@ -43,9 +59,10 @@ impl SolitaireSolver {
         if self.length() == 0 {
             return Err(DictionaryNotFound);
         }
+        self.rng = SmallRng::from_entropy();
         match self.mode {
             SolitaireMode::Character => self.state = self.dict.char_map(),
-            SolitaireMode::Pinyin => self.state = self.dict.pinyin_map(),
+            SolitaireMode::Sound => self.state = self.dict.sound_map(),
             SolitaireMode::Tone => self.state = self.dict.tone_map(),
         }
         Ok(())
@@ -55,7 +72,7 @@ impl SolitaireSolver {
         let head = input.chars().rev().next()?;
         let key = match self.mode {
             SolitaireMode::Character => head.to_string(),
-            SolitaireMode::Pinyin => head.to_pinyin()?.with_tone().to_string(),
+            SolitaireMode::Sound => head.to_pinyin()?.with_tone().to_string(),
             SolitaireMode::Tone => head.to_pinyin()?.plain().to_string(),
         };
         if let Some(s) = self.state.get_mut(&key) {
@@ -68,9 +85,8 @@ impl SolitaireSolver {
         Err(SolitaireNotFound)
     }
 
-    pub fn solve_chain(&mut self, head: &str, length: usize) -> (Vec<Idiom>, bool) {
+    pub fn solve_chain(&mut self, head: &str, length: usize) -> Vec<Idiom> {
         let mut out = vec![];
-        let mut success = true;
         let mut this = String::from(head);
         for _ in 0..length {
             match self.solve(&this) {
@@ -79,11 +95,10 @@ impl SolitaireSolver {
                     out.push(o)
                 }
                 Err(_) => {
-                    success = false;
                     break;
                 }
             }
         }
-        return (out, success);
+        return out;
     }
 }

@@ -9,8 +9,8 @@ pub struct Idiom {
     pub pinyin: String,
     #[serde(rename(deserialize = "Explanation"))]
     pub explanation: String,
-    #[serde(rename(deserialize = "Synonym"))]
-    pub synonym: String,
+    //#[serde(rename(deserialize = "Synonym"))]
+    //pub synonym: String,
 }
 
 impl Idiom {
@@ -20,17 +20,17 @@ impl Idiom {
     pub fn final_char(&self) -> char {
         self.idiom.chars().rev().next().unwrap()
     }
-    pub fn first_pinyin(&self) -> String {
-        self.pinyin.split(' ').next().unwrap().to_owned()
-    }
-    pub fn final_pinyin(&self) -> String {
-        self.pinyin.split(' ').rev().next().unwrap().to_owned()
-    }
-    pub fn first_tone(&self) -> String {
+    pub fn first_sound(&self) -> String {
         Self::get_letter(self.idiom.split(' ').next().unwrap().chars())
     }
-    pub fn final_tone(&self) -> String {
+    pub fn final_sound(&self) -> String {
         Self::get_letter(self.idiom.split(' ').rev().next().unwrap().chars())
+    }
+    pub fn first_tone(&self) -> String {
+        self.pinyin.split(' ').next().unwrap().to_owned()
+    }
+    pub fn final_tone(&self) -> String {
+        self.pinyin.split(' ').rev().next().unwrap().to_owned()
     }
     fn get_letter(chars: Chars) -> String {
         let mut out = String::new();
@@ -38,10 +38,10 @@ impl Idiom {
             match c {
                 'ā' | 'á' | 'ǎ' | 'à' => out.push('a'),
                 'ē' | 'é' | 'ě' | 'è' => out.push('e'),
-                'ī'| 'í' | 'ǐ' | 'ì' => out.push('i'),
-                'ō'| 'ó' | 'ǒ' | 'ò' => out.push('o'),
-                'ū'| 'ú' | 'ǔ' | 'ù' => out.push('u'),
-                'ǖ'| 'ǘ' | 'ǚ' | 'ǜ' => out.push('u'),
+                'ī' | 'í' | 'ǐ' | 'ì' => out.push('i'),
+                'ō' | 'ó' | 'ǒ' | 'ò' => out.push('o'),
+                'ū' | 'ú' | 'ǔ' | 'ù' => out.push('u'),
+                'ǖ' | 'ǘ' | 'ǚ' | 'ǜ' => out.push('u'),
                 ' ' => break,
                 _ => out.push(c),
             }

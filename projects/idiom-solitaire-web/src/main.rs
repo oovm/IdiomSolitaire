@@ -1,13 +1,13 @@
 #![recursion_limit = "1024"]
 
-
+use idiom_solitaire::{Idiom, SeedableRng, SmallRng, SolitaireMode, SolitaireSolver};
+use std::str::FromStr;
 use yew::{
     html,
     prelude::*,
     services::reader::{FileData, ReaderService, ReaderTask},
     Component, ComponentLink, Html, ShouldRender,
 };
-use idiom_solitaire::{SolitaireSolver};
 
 mod form;
 
@@ -25,7 +25,8 @@ pub struct Model {
     tasks: Vec<ReaderTask>,
     input: String,
     solver: SolitaireSolver,
-    length: usize
+    output: Vec<Idiom>,
+    length: usize,
 }
 
 impl Component for Model {
@@ -33,19 +34,30 @@ impl Component for Model {
     type Properties = ();
 
     fn create(_: Self::Properties, link: ComponentLink<Self>) -> Self {
-        Self {
-            link,
-            tasks: vec![],
-            input: String::new(),
-            solver: Default::default(),
-            length: 1
-        }
+        let mut solver = SolitaireSolver::default();
+        solver.load(include_bytes!("../../external/database.csv")).unwrap();
+        Self { link, tasks: vec![], input: String::new(), solver, output: vec![], length: 1 }
     }
 
     fn update(&mut self, msg: Self::Message) -> ShouldRender {
         match msg {
             Event::Input(s) => {
                 self.input = s;
+                self.resolve()
+            }
+            Event::Length(ChangeData::Value(s)) => {
+                if let Ok(o) = usize::from_str(&s) {
+                    self.length = o
+                }
+                self.resolve()
+            }
+            Event::Mode(ChangeData::Select(s)) => {
+                self.solver.mode = match s.value().as_ref() {
+                    "2" => SolitaireMode::Sound,
+                    "1" => SolitaireMode::Tone,
+                    _ => SolitaireMode::Character,
+                };
+                self.resolve()
             }
             Event::Files(ChangeData::Files(f)) => {
                 let task = ReaderService::new().read_file(f.get(0).unwrap(), self.link.callback(Event::Loaded)).unwrap();
@@ -53,8 +65,8 @@ impl Component for Model {
             }
             Event::Loaded(data) => {
                 let _ = data;
-                //ConsoleService::log(&format!("{:?}", data));
-                //self.image = data.content
+                // ConsoleService::log(&format!("{:?}", data));
+                // self.image = data.content
             }
             _ => (),
         }
@@ -80,6 +92,15 @@ impl Component for Model {
             {self.form_view()}
         </main>
         }
+    }
+}
+
+impl Model {
+    pub fn renew(&mut self) {
+        self.solver.rng = SmallRng::from_entropy()
+    }
+    pub fn resolve(&mut self) {
+        self.output = self.solver.solve_chain(&self.input, self.length)
     }
 }
 

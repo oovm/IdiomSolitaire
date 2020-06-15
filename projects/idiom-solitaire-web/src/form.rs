@@ -1,32 +1,25 @@
 use crate::{Event, Model};
+use idiom_solitaire::{SolitaireMode, Idiom};
 use yew::prelude::*;
-use idiom_solitaire::SolitaireMode;
 
 impl Model {
     pub fn format_mode(&self) -> u32 {
         match self.solver.mode {
             SolitaireMode::Character => 0,
-            SolitaireMode::Pinyin => 1,
+            SolitaireMode::Sound => 1,
             SolitaireMode::Tone => 2,
         }
     }
 
-    pub fn qr_code_view(&self) -> Html {
-        let qr = "";
-        return html! {
-        <div class="form-group">
-            <label class="col-sm-2">{"QR_CODE:"}</label>
-            <div class="col-sm-10">{qr}</div>
-        </div>
-        };
+    pub fn solitaire_view(&self) -> Html {
+        self.output.iter().map(idiom_view).collect::<Html>()
     }
 
     pub fn form_view(&self) -> Html {
         html! {
         <form class="form-horizontal">
-            {self.qr_code_view()}
             <div class="form-group">
-                <label class="col-sm-2">{"Text:"}</label>
+                <label class="col-sm-2">{"初始输入:"}</label>
                 <div class="col-sm-10">
                     <textarea class="form-control" rows="3"
                         value=self.input
@@ -35,7 +28,7 @@ impl Model {
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2">{"Image:"}</label>
+                <label class="col-sm-2">{"本地字典:"}</label>
                 <div class="col-sm-10">
                     <input type="file" multiple=true
                         onchange=self.link.callback(|input: ChangeData| Event::Files(input))
@@ -43,16 +36,16 @@ impl Model {
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2">{"Output Size:"}</label>
+                <label class="col-sm-2">{"接龙长度:"}</label>
                 <div class="col-sm-9">
                     <div class="form-control-static">
-                        <input type="range" min="80" max="640" step="20"
-                            value=self.output_size
-                            onchange=self.link.callback(|input: ChangeData| Event::OutputSize(input))
+                        <input type="range" min="1" max="100" step="1"
+                            value=self.length
+                            onchange=self.link.callback(|input: ChangeData| Event::Length(input))
                         />
                     </div>
                 </div>
-                <label class="col-sm-1">{self.output_size}</label>
+                <label class="col-sm-1">{self.length}</label>
             </div>
             <div class="form-group">
                 <label class="col-sm-2">{"接龙模式:"}</label>
@@ -68,35 +61,23 @@ impl Model {
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2">{"Enhanced:"}</label>
-                <div class="col-sm-10">
-                    <input type="checkbox"
-                        checked=self.enhanced
-                        onchange=self.link.callback(|input: ChangeData| Event::EnhanceMode(input))
-                    />
-                 </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2">{"Background:"}</label>
-                <div class="col-sm-10">
-                    <div class="form-control-static">
-                        <input type="color"
-                            onchange=self.link.callback(|input: ChangeData| Event::LightColor(input))
-                        />
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-sm-2">{"Foreground:"}</label>
-                <div class="col-sm-10">
-                    <div class="form-control-static">
-                        <input type="color"
-                            onchange=self.link.callback(|input: ChangeData| Event::DarkColor(input))
-                        />
-                    </div>
-                </div>
+                <label class="col-sm-2">{"接龙结果:"}</label>
+                <div class="col-sm-10">{self.solitaire_view()}</div>
             </div>
         </form>
         }
+    }
+}
+
+pub fn idiom_view(input: &Idiom)->Html {
+    let text = input.idiom.as_str();
+
+    html! {
+    <span class="tooltip">{text}
+        <div class="tooltiptext">
+            <label>{"提示文本22:"}</label>
+            <span>{"提示文本"}</span>
+        </div>
+    </span>
     }
 }

@@ -41,8 +41,8 @@ impl Dictionary {
     pub fn char_map(&self) -> HashMap<String, Vec<Idiom>> {
         self.0.iter().map(|e| (e.first_char().to_string(), e.clone())).into_group_map()
     }
-    pub fn pinyin_map(&self) -> HashMap<String, Vec<Idiom>> {
-        self.0.iter().map(|e| (e.first_pinyin(), e.clone())).into_group_map()
+    pub fn sound_map(&self) -> HashMap<String, Vec<Idiom>> {
+        self.0.iter().map(|e| (e.first_sound(), e.clone())).into_group_map()
     }
     pub fn tone_map(&self) -> HashMap<String, Vec<Idiom>> {
         self.0.iter().map(|e| (e.first_tone(), e.clone())).into_group_map()
