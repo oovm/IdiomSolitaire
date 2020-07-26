@@ -1,5 +1,5 @@
 use crate::{Event, Model};
-use idiom_solitaire::{SolitaireMode, Idiom};
+use idiom_solitaire::{Idiom, SolitaireMode};
 use yew::prelude::*;
 
 impl Model {
@@ -12,12 +12,25 @@ impl Model {
     }
 
     pub fn solitaire_view(&self) -> Html {
-        self.output.iter().map(idiom_view).collect::<Html>()
+        if self.output.is_empty() {
+            return html! {};
+        }
+        let items = self.output.iter().map(|i| idiom_view(i)).collect::<Html>();
+        return html! {
+        <div class="form-group">
+            <label class="col-sm-2">{"接龙结果:"}</label>
+            <div class="col-sm-10">
+                {items}
+                <label sytle="color:red">{"?"}</label>
+            </div>
+        </div>
+        };
     }
 
     pub fn form_view(&self) -> Html {
+        // let debug = format!("{:?}", self);
         html! {
-        <form class="form-horizontal">
+        <form class="form-horizontal">//{debug}
             <div class="form-group">
                 <label class="col-sm-2">{"初始输入:"}</label>
                 <div class="col-sm-10">
@@ -60,24 +73,28 @@ impl Model {
                     </select>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-sm-2">{"接龙结果:"}</label>
-                <div class="col-sm-10">{self.solitaire_view()}</div>
-            </div>
+            {self.solitaire_view()}
         </form>
         }
     }
 }
 
-pub fn idiom_view(input: &Idiom)->Html {
+pub fn idiom_view(input: &Idiom) -> Html {
     let text = input.idiom.as_str();
-
-    html! {
-    <span class="tooltip">{text}
+    return html! {<>
+    <span class="tooltip">
+        {text}
         <div class="tooltiptext">
-            <label>{"提示文本22:"}</label>
+            <label>{"成语:"}</label>
+            <span>{"提示文本"}</span>
+            <br/>
+            <label>{"注音:"}</label>
+            <span>{"提示文本"}</span>
+            <br/>
+            <label>{"注释:"}</label>
             <span>{"提示文本"}</span>
         </div>
     </span>
-    }
+    {" ➞ "}
+    </>};
 }

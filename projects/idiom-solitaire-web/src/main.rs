@@ -1,6 +1,6 @@
 #![recursion_limit = "1024"]
 
-use idiom_solitaire::{Idiom, SeedableRng, SmallRng, SolitaireMode, SolitaireSolver};
+use idiom_solitaire::{Idiom, SolitaireMode, SolitaireSolver};
 use std::str::FromStr;
 use yew::{
     html,
@@ -35,21 +35,22 @@ impl Component for Model {
 
     fn create(_: Self::Properties, link: ComponentLink<Self>) -> Self {
         let mut solver = SolitaireSolver::default();
+        solver.mode = SolitaireMode::Tone;
         solver.load(include_bytes!("../../external/database.csv")).unwrap();
-        Self { link, tasks: vec![], input: String::new(), solver, output: vec![], length: 1 }
+        Self { link, tasks: vec![], input: String::from("耗子尾汁"), solver, output: vec![], length: 1 }
     }
 
     fn update(&mut self, msg: Self::Message) -> ShouldRender {
         match msg {
             Event::Input(s) => {
                 self.input = s;
-                self.resolve()
+                self.resolve();
             }
             Event::Length(ChangeData::Value(s)) => {
                 if let Ok(o) = usize::from_str(&s) {
                     self.length = o
                 }
-                self.resolve()
+                self.resolve();
             }
             Event::Mode(ChangeData::Select(s)) => {
                 self.solver.mode = match s.value().as_ref() {
@@ -96,11 +97,14 @@ impl Component for Model {
 }
 
 impl Model {
-    pub fn renew(&mut self) {
-        self.solver.rng = SmallRng::from_entropy()
-    }
     pub fn resolve(&mut self) {
+        if self.solver.dict.0.is_empty() {
+            "GG";
+        }
         self.output = self.solver.solve_chain(&self.input, self.length)
+    }
+    pub fn load_default_dict(&mut self) {
+        unimplemented!()
     }
 }
 

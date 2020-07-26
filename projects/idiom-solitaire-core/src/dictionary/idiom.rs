@@ -9,8 +9,6 @@ pub struct Idiom {
     pub pinyin: String,
     #[serde(rename(deserialize = "Explanation"))]
     pub explanation: String,
-    //#[serde(rename(deserialize = "Synonym"))]
-    //pub synonym: String,
 }
 
 impl Idiom {
@@ -21,10 +19,10 @@ impl Idiom {
         self.idiom.chars().rev().next().unwrap()
     }
     pub fn first_sound(&self) -> String {
-        Self::get_letter(self.idiom.split(' ').next().unwrap().chars())
+        Self::get_letter(self.pinyin.split(' ').next().unwrap().chars())
     }
     pub fn final_sound(&self) -> String {
-        Self::get_letter(self.idiom.split(' ').rev().next().unwrap().chars())
+        Self::get_letter(self.pinyin.split(' ').rev().next().unwrap().chars())
     }
     pub fn first_tone(&self) -> String {
         self.pinyin.split(' ').next().unwrap().to_owned()

@@ -68,14 +68,8 @@ impl SolitaireSolver {
         Ok(())
     }
 
-    pub fn solve(&mut self, input: &str) -> Result<Idiom> {
-        let head = input.chars().rev().next()?;
-        let key = match self.mode {
-            SolitaireMode::Character => head.to_string(),
-            SolitaireMode::Sound => head.to_pinyin()?.with_tone().to_string(),
-            SolitaireMode::Tone => head.to_pinyin()?.plain().to_string(),
-        };
-        if let Some(s) = self.state.get_mut(&key) {
+    pub fn solve_random(&mut self, input: &str) -> Result<Idiom> {
+        if let Some(s) = self.state.get_mut(&self.get_key(input)?) {
             if s.is_empty() {
                 return Err(SolitaireNotFound);
             }
@@ -85,11 +79,33 @@ impl SolitaireSolver {
         Err(SolitaireNotFound)
     }
 
+    pub fn solve_greedy(&mut self, input: &str) -> Result<Idiom> {
+        let s = match self.state.get(&self.get_key(input)?) {
+            Some(s) => s,
+            None => return Err(SolitaireNotFound),
+        };
+        if s.is_empty() {
+            return Err(SolitaireNotFound);
+        }
+        let mut max = 0;
+        for i in 0..s.len() {
+            let this = unsafe { s.get_unchecked(i) };
+            let len = match self.state.get(&self.get_key(&this.idiom)?) {
+                Some(v) => v.len(),
+                None => 0,
+            };
+            if len > max {
+                max = i
+            }
+        }
+        let s = self.state.get_mut(&self.get_key(input)?)?;
+        return Ok(s.swap_remove(max));
+    }
     pub fn solve_chain(&mut self, head: &str, length: usize) -> Vec<Idiom> {
         let mut out = vec![];
         let mut this = String::from(head);
         for _ in 0..length {
-            match self.solve(&this) {
+            match self.solve_greedy(&this) {
                 Ok(o) => {
                     this = o.idiom.clone();
                     out.push(o)
@@ -100,5 +116,17 @@ impl SolitaireSolver {
             }
         }
         return out;
+    }
+}
+
+impl SolitaireSolver {
+    fn get_key(&self, input: &str) -> Result<String> {
+        let last = input.chars().rev().next()?;
+        let key = match self.mode {
+            SolitaireMode::Character => last.to_string(),
+            SolitaireMode::Tone => last.to_pinyin()?.with_tone().to_string(),
+            SolitaireMode::Sound => last.to_pinyin()?.plain().to_string(),
+        };
+        return Ok(key);
     }
 }
