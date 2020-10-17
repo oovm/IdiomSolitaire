@@ -86,13 +86,13 @@ pub fn idiom_view(input: &Idiom) -> Html {
         {text}
         <div class="tooltiptext">
             <label>{"成语:"}</label>
-            <span>{"提示文本"}</span>
+            <span>{text}</span>
             <br/>
             <label>{"注音:"}</label>
-            <span>{"提示文本"}</span>
+            <span>{input.pinyin.as_str()}</span>
             <br/>
             <label>{"注释:"}</label>
-            <span>{"提示文本"}</span>
+            <span>{input.explanation.as_str()}</span>
         </div>
     </span>
     {" ➞ "}

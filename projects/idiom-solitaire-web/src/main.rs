@@ -35,7 +35,6 @@ impl Component for Model {
 
     fn create(_: Self::Properties, link: ComponentLink<Self>) -> Self {
         let mut solver = SolitaireSolver::default();
-        solver.mode = SolitaireMode::Tone;
         solver.load(include_bytes!("../../external/database.csv")).unwrap();
         Self { link, tasks: vec![], input: String::from("耗子尾汁"), solver, output: vec![], length: 1 }
     }
@@ -58,6 +57,7 @@ impl Component for Model {
                     "1" => SolitaireMode::Tone,
                     _ => SolitaireMode::Character,
                 };
+                self.solver.refresh();
                 self.resolve()
             }
             Event::Files(ChangeData::Files(f)) => {
