@@ -1,5 +1,5 @@
-import * as S from "./SelfReference";
-import * as K from "./Killer"
+import * as S from "./SelfReference.js";
+import * as K from "./Killer.js"
 
 export const SelfReference = {
     Character: S.SelfReferenceCharacter.map(x => x.Idiom),

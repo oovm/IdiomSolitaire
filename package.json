@@ -1,7 +1,9 @@
 {
     "private": true,
+    "type": "module",
     "scripts": {
-        "tsc": "tsc -b -w",
+        "start": "node --experimental-modules dist/index.js",
+        "tsc": "tsc -b",
         "deploy": "bash build/deploy.sh",
         "lint": "tslint projects/**/*.ts",
         "lint:fix": "tslint projects/**/*.ts --fix"
@@ -14,5 +16,9 @@
         "tslint": "^5.12.1",
         "typescript": "^3.2.2"
     },
+    "files": [
+        "source",
+        "dist"
+    ],
     "dependencies": {}
 }
