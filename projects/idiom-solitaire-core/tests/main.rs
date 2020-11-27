@@ -20,3 +20,12 @@ fn chain() {
     // println!("{:#?}",solver.dict.sound_map().iter().next().unwrap());
     println!("{:#?}", solver.solve_chain("耗子尾汁", 100));
 }
+
+#[test]
+fn search() {
+    let mut solver = SolitaireSolver::default();
+    solver.mode = SolitaireMode::Character;
+    solver.load(include_bytes!("../../external/database.csv")).unwrap();
+    // println!("{:#?}",solver.dict.sound_map().iter().next().unwrap());
+    println!("{:#?}", solver.solve_target("为所欲为", "耗子尾汁"));
+}

@@ -11,6 +11,22 @@ impl Model {
         }
     }
 
+    pub fn error_view(&self) -> Html {
+        match &self.errors {
+            Some(s) => {
+                html! {
+                <div class="form-group">
+                    <label class="col-sm-2">{"报错信息:"}</label>
+                    <div class="col-sm-10">
+                        <label sytle="color:red">{s}</label>
+                    </div>
+                </div>
+                }
+            }
+            None => html! {},
+        }
+    }
+
     pub fn solitaire_view(&self) -> Html {
         if self.output.is_empty() {
             return html! {};
@@ -73,6 +89,7 @@ impl Model {
                     </select>
                 </div>
             </div>
+            {self.error_view()}
             {self.solitaire_view()}
         </form>
         }
@@ -85,13 +102,13 @@ pub fn idiom_view(input: &Idiom) -> Html {
     <span class="tooltip">
         {text}
         <div class="tooltiptext">
-            <label>{"成语:"}</label>
+            <label>{"成语: "}</label>
             <span>{text}</span>
             <br/>
-            <label>{"注音:"}</label>
+            <label>{"注音: "}</label>
             <span>{input.pinyin.as_str()}</span>
             <br/>
-            <label>{"注释:"}</label>
+            <label>{"注释: "}</label>
             <span>{input.explanation.as_str()}</span>
         </div>
     </span>
