@@ -5,18 +5,16 @@ Idiom Solitaire
 
 ### Web
 
-- 在线成语接龙:
-- 在线成语接龙(Gitee):
-- 成语接龙杀手:
-- 成语接龙杀手(Gitee): 
+- 在线成语接龙: [Idiom Solitaire](https://galaster.github.io/IdiomSolitaire) / [Idiom Solitaire(Gitee)](https://notedge.gitee.io/IdiomSolitaire)
+- 成语接龙杀手: [Idiom Solitaire Killer](https://galaster.github.io/IdiomSolitaireFuck) / [Idiom Solitaire Killer(Gitee)](https://notedge.gitee.io/IdiomSolitaireFuck)
 
 ### 数据库
 
-- 数据库下载:
+- 数据库下载: [database.csv](https://github.com/GalAster/IdiomSolitaire/blob/master/projects/external/database.csv)
 
 ### Rust
 
-- 查看示例: 
+- 查看示例: [idiom-solitaire-core/tests](https://github.com/GalAster/IdiomSolitaire/blob/master/projects/idiom-solitaire-core/tests/main.rs)
 
 ### Python
 
@@ -24,7 +22,13 @@ Idiom Solitaire
 pyo3 bind
 ```
 
-## 算法
+### Typescript/Javascript
+
+```js
+wasm bind
+```
+
+## Algorithm
 
 ### 成语接龙模式
 
