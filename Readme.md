@@ -1,4 +1,28 @@
-Rust Template Project
-=====================
+Idiom Solitaire
+===============
 
-Rust template project for monorepo
+## 使用
+
+### 在线演示
+
+### 
+
+## 算法
+
+### 成语接龙模式
+
+```
+
+
+```
+
+### 自由成语接龙
+
+一个
+
+- 贪婪算法:
+- 随机算法: 
+
+### 目标接龙搜索
+
+- BFS: 
