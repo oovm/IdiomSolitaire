@@ -3,6 +3,7 @@ use crate::{
     Error::{DictionaryNotFound, SolitaireNotFound},
     Idiom, Result,
 };
+use pathfinding::directed::bfs::bfs;
 use pinyin::ToPinyin;
 use rand::{rngs::SmallRng, seq::IteratorRandom, SeedableRng};
 use std::{
@@ -48,6 +49,22 @@ impl SolitaireSolver {
     pub fn length(&self) -> usize {
         self.dict.0.len()
     }
+    fn get_key(&self, input: &str) -> String {
+        let last = input.chars().rev().next().unwrap();
+        let key = match self.mode {
+            SolitaireMode::Character => last.to_string(),
+            SolitaireMode::Tone => last.to_pinyin().unwrap().with_tone().to_string(),
+            SolitaireMode::Sound => last.to_pinyin().unwrap().plain().to_string(),
+        };
+        return key;
+    }
+    fn successors(&self, state: &Idiom) -> Vec<Idiom> {
+        let key = self.get_key(&state.idiom);
+        match self.state.get(&key) {
+            None => vec![],
+            Some(s) => s.to_owned(),
+        }
+    }
 }
 
 impl SolitaireSolver {
@@ -69,7 +86,7 @@ impl SolitaireSolver {
     }
 
     pub fn solve_random(&mut self, input: &str) -> Result<Idiom> {
-        if let Some(s) = self.state.get_mut(&self.get_key(input)?) {
+        if let Some(s) = self.state.get_mut(&self.get_key(input)) {
             if s.is_empty() {
                 return Err(SolitaireNotFound);
             }
@@ -79,8 +96,20 @@ impl SolitaireSolver {
         Err(SolitaireNotFound)
     }
 
+    pub fn solve_target(&mut self, input: &str, target: &str) -> Result<Vec<Idiom>> {
+        let first = Idiom::from(input);
+        let target = target.chars().next()?;
+        let target = match self.mode {
+            SolitaireMode::Character => target.to_string(),
+            SolitaireMode::Tone => target.to_pinyin()?.with_tone().to_string(),
+            SolitaireMode::Sound => target.to_pinyin()?.plain().to_string(),
+        };
+        let result = bfs(&first, |p| self.successors(p), |p| self.get_key(&p.idiom) == target)?;
+        Ok(result)
+    }
+
     pub fn solve_greedy(&mut self, input: &str) -> Result<Idiom> {
-        let s = match self.state.get(&self.get_key(input)?) {
+        let s = match self.state.get(&self.get_key(input)) {
             Some(s) => s,
             None => return Err(SolitaireNotFound),
         };
@@ -90,7 +119,7 @@ impl SolitaireSolver {
         let mut max = 0;
         for i in 0..s.len() {
             let this = unsafe { s.get_unchecked(i) };
-            let len = match self.state.get(&self.get_key(&this.idiom)?) {
+            let len = match self.state.get(&self.get_key(&this.idiom)) {
                 Some(v) => v.len(),
                 None => 0,
             };
@@ -98,7 +127,7 @@ impl SolitaireSolver {
                 max = i
             }
         }
-        let s = self.state.get_mut(&self.get_key(input)?)?;
+        let s = self.state.get_mut(&self.get_key(input))?;
         return Ok(s.swap_remove(max));
     }
     pub fn solve_chain(&mut self, head: &str, length: usize) -> Vec<Idiom> {
@@ -116,17 +145,5 @@ impl SolitaireSolver {
             }
         }
         return out;
-    }
-}
-
-impl SolitaireSolver {
-    fn get_key(&self, input: &str) -> Result<String> {
-        let last = input.chars().rev().next()?;
-        let key = match self.mode {
-            SolitaireMode::Character => last.to_string(),
-            SolitaireMode::Tone => last.to_pinyin()?.with_tone().to_string(),
-            SolitaireMode::Sound => last.to_pinyin()?.plain().to_string(),
-        };
-        return Ok(key);
     }
 }

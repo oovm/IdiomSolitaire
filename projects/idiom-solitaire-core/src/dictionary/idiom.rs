@@ -1,7 +1,8 @@
+use pinyin::{to_pinyin_vec, Pinyin};
 use serde::Deserialize;
 use std::str::Chars;
 
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, Eq, PartialEq, Hash, Deserialize)]
 pub struct Idiom {
     #[serde(rename(deserialize = "Idiom"))]
     pub idiom: String,
@@ -9,6 +10,11 @@ pub struct Idiom {
     pub pinyin: String,
     #[serde(rename(deserialize = "Explanation"))]
     pub explanation: String,
+}
+impl From<&str> for Idiom {
+    fn from(input: &str) -> Self {
+        Self { idiom: String::from(input), pinyin: to_pinyin_vec(input, Pinyin::plain).join(" "), explanation: String::new() }
+    }
 }
 
 impl Idiom {

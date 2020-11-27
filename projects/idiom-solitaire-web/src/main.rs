@@ -1,6 +1,6 @@
 #![recursion_limit = "1024"]
 
-use idiom_solitaire::{Idiom, SolitaireMode, SolitaireSolver};
+use idiom_solitaire::{Error, Idiom, SolitaireMode, SolitaireSolver};
 use std::str::FromStr;
 use yew::{
     html,
@@ -27,6 +27,7 @@ pub struct Model {
     solver: SolitaireSolver,
     output: Vec<Idiom>,
     length: usize,
+    errors: Option<String>,
 }
 
 impl Component for Model {
@@ -36,7 +37,7 @@ impl Component for Model {
     fn create(_: Self::Properties, link: ComponentLink<Self>) -> Self {
         let mut solver = SolitaireSolver::default();
         solver.load(include_bytes!("../../external/database.csv")).unwrap();
-        Self { link, tasks: vec![], input: String::from("耗子尾汁"), solver, output: vec![], length: 1 }
+        Self { link, tasks: vec![], input: String::from("耗子尾汁"), solver, output: vec![], length: 1, errors: None }
     }
 
     fn update(&mut self, msg: Self::Message) -> ShouldRender {
@@ -57,7 +58,6 @@ impl Component for Model {
                     "1" => SolitaireMode::Tone,
                     _ => SolitaireMode::Character,
                 };
-                self.solver.refresh();
                 self.resolve()
             }
             Event::Files(ChangeData::Files(f)) => {
@@ -65,9 +65,9 @@ impl Component for Model {
                 self.tasks.push(task)
             }
             Event::Loaded(data) => {
-                let _ = data;
-                // ConsoleService::log(&format!("{:?}", data));
-                // self.image = data.content
+                if let Err(e) = self.solver.load(&data.content) {
+                    self.errors = Some(format!("{:?}", e))
+                }
             }
             _ => (),
         }
@@ -101,6 +101,7 @@ impl Model {
         if self.solver.dict.0.is_empty() {
             "GG";
         }
+        self.solver.refresh();
         self.output = self.solver.solve_chain(&self.input, self.length)
     }
     pub fn load_default_dict(&mut self) {
