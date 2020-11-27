@@ -1,6 +1,6 @@
 #![recursion_limit = "1024"]
 
-use idiom_solitaire::{Error, Idiom, SolitaireMode, SolitaireSolver};
+use idiom_solitaire::{Idiom, SolitaireMode, SolitaireSolver};
 use std::str::FromStr;
 use yew::{
     html,
@@ -97,6 +97,7 @@ impl Component for Model {
 }
 
 impl Model {
+    #[allow(unused_must_use)]
     pub fn resolve(&mut self) {
         if self.solver.dict.0.is_empty() {
             "GG";

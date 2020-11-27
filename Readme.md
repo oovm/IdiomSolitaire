@@ -21,7 +21,7 @@ Idiom Solitaire
 ### Python
 
 ```py
-pyo3
+pyo3 bind
 ```
 
 ## 算法
@@ -41,11 +41,9 @@ pub enum SolitaireMode {
 
 ### 自由成语接龙
 
-一个
-
-- 贪婪算法:
-- 随机算法: 
+- 贪婪算法: `solver.solve_greedy(input: &str) -> Result<Idiom>`
+- 随机算法: `solver.solve_random(input: &str) -> Result<Idiom>`
 
 ### 目标接龙搜索
 
-- BFS: 
+- BFS: `solver.solve_target(input: &str, target: &str) -> Result<Vec<Idiom>>`

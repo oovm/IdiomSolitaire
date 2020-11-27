@@ -12,7 +12,7 @@ impl Model {
     }
 
     pub fn error_view(&self) -> Html {
-        match self.errors {
+        match &self.errors {
             Some(s) => {
                 html! {
                 <div class="form-group">
