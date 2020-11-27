@@ -13,8 +13,11 @@ use std::{
 
 #[derive(Clone, Debug)]
 pub enum SolitaireMode {
+    /// 同字模式, 需要字符完全相同, 允许多音字
     Character = 0,
+    /// 同调模式, 需要发音以及音调相同
     Tone = 1,
+    /// 同音模式, 允许音调不同
     Sound = 2,
 }
 
